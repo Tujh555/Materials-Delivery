@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Materials Delivery</string>
+    <string name="enterNameCity">Введите название города</string>
+    <string name="enterNameCompany">Введите название компании</string>
+    <string name="input">Войти</string>
+    <string name="auth">зарегистрироваться</string>
 </resources>
