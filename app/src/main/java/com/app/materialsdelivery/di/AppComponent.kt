@@ -9,6 +9,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [FirebaseModule::class])
 interface AppComponent {
+    fun inject(fragment: TestFragment)
 
     @Component.Builder
     interface Builder {

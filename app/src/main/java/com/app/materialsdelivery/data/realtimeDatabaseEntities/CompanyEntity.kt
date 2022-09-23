@@ -11,4 +11,17 @@ data class CompanyEntity(
     val foundationYear: String?,
     val outgoingDeliveries: List<DeliveryEntity>?,
     val incomingDeliveries: List<DeliveryEntity>?,
-)
+) {
+    constructor(): this(
+        -1,
+        "empty",
+        "empty",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+    )
+}

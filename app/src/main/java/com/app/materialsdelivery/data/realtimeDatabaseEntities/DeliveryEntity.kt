@@ -6,6 +6,16 @@ data class DeliveryEntity(
     val totalAmount: Long,
     val deliveryPrice: Long,
     val subjectsCount: Int,
-    val destinationCompany: CompanyEntity,
-    val dispatchCompany: CompanyEntity,
-)
+    val destinationCompany: CompanyEntity?,
+    val dispatchCompany: CompanyEntity?,
+) {
+    constructor(): this(
+        -1,
+        DeliveryItemEntity(),
+        -1,
+        -1,
+        0,
+        null,
+        null
+    )
+}
