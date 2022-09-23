@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "124724184722",
+    "project_id": "materials-delivery-3ff15",
+    "storage_bucket": "materials-delivery-3ff15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124724184722:android:88ce10446f5eb08931484b",
+        "android_client_info": {
+          "package_name": "com.app.materialsdelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124724184722-mu3tiv87kqlvo7kbdqu9mr62f0k3uqmn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpvMs6uEZIhgflKzWcW5cmZGSV_5WLTa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124724184722-mu3tiv87kqlvo7kbdqu9mr62f0k3uqmn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
