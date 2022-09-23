@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/delivery_adding"
+        android:icon="@drawable/ic_android_black_24dp"
+        android:title="@string/delivery_adding_menu_item_text"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/received_deliveries"
+        android:icon="@drawable/ic_android_black_24dp"
+        android:title="@string/received_deliveries_menu_item_text"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/sent_deliveries"
+        android:icon="@drawable/ic_android_black_24dp"
+        android:title="@string/sent_deliveries_menu_item_text"
+        android:orderInCategory="3"/>
+    <item
+        android:id="@+id/company_info"
+        android:icon="@drawable/ic_android_black_24dp"
+        android:title="@string/company_info_menu_item_text"
+        android:orderInCategory="4"/>
+</menu>

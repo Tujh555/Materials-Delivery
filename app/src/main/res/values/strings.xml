@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Materials Delivery</string>
+    <string name="delivery_adding_menu_item_text">Добавление доставки</string>
+    <string name="received_deliveries_menu_item_text">Отправляемые поставки</string>
+    <string name="sent_deliveries_menu_item_text">Получаемые поставки</string>
+    <string name="company_info_menu_item_text">Информация о компании</string>
     <string name="enterNameCity">Введите название города</string>
     <string name="enterNameCompany">Введите название компании</string>
     <string name="input">Войти</string>
