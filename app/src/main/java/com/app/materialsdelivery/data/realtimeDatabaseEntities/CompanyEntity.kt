@@ -1,17 +1,19 @@
 package com.app.materialsdelivery.data.realtimeDatabaseEntities
 
+import com.app.materialsdelivery.data.Company
+
 data class CompanyEntity(
-    val id: Int,
-    val name: String,
-    val cityName: String,
-    val photoUri: String?,
-    val individualTaxNumber: String?,
-    val offeredProducts: List<String>?,
-    val companyDescription: String?,
-    val foundationYear: String?,
-    val outgoingDeliveries: List<DeliveryEntity>?,
-    val incomingDeliveries: List<DeliveryEntity>?,
-) {
+    override val id: Int,
+    override  val name: String,
+    override val cityName: String,
+    override val photoUri: String?,
+    override val individualTaxNumber: String?,
+    override val offeredProducts: List<String>?,
+    override val companyDescription: String?,
+    override val foundationYear: String?,
+    override val outgoingDeliveries: List<DeliveryEntity>?,
+    override val incomingDeliveries: List<DeliveryEntity>?,
+) : Company {
     constructor(): this(
         -1,
         "empty",
