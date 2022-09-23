@@ -14,7 +14,7 @@
         android:id="@+id/sent_deliveries"
         android:icon="@drawable/ic_android_black_24dp"
         android:title="@string/sent_deliveries_menu_item_text"
-        android:orderInCategory="3"/>
+        android:orderInCategory="3" />
     <item
         android:id="@+id/company_info"
         android:icon="@drawable/ic_android_black_24dp"
