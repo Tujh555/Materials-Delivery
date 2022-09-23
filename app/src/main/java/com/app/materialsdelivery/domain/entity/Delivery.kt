@@ -6,6 +6,6 @@ data class Delivery(
     val totalAmount: Long,
     val deliveryPrice: Long,
     val subjectsCount: Int,
-    val destinationCompany: Company,
-    val dispatchCompany: Company,
+    val destinationCompany: Company?,
+    val dispatchCompany: Company?,
 )
