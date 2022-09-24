@@ -27,7 +27,7 @@ class SuppliesForTheCompanyFragment : Fragment() {
         ViewModelProvider(
             this,
             factory
-        ).get(SuppliesForTheCompanyViewModel::class.java)
+        )[SuppliesForTheCompanyViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {

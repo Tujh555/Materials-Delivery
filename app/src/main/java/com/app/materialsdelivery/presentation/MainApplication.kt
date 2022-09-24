@@ -2,7 +2,6 @@ package com.app.materialsdelivery.presentation
 
 import android.app.Application
 import com.app.materialsdelivery.di.AppComponent
-import com.app.materialsdelivery.di.DaggerAppComponent
 
 class MainApplication : Application() {
     private var _appComponent: AppComponent? = null
@@ -14,7 +13,7 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        _appComponent = DaggerAppComponent
+        _appComponent = Dagger
             .builder()
             .context(this)
             .build()
