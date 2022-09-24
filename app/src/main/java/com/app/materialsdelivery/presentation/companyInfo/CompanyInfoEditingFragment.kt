@@ -12,6 +12,8 @@ import com.app.materialsdelivery.data.mappers.toDomain
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.CompanyEntity
 import com.app.materialsdelivery.databinding.FragmentCompanyInfoEditingBinding
 import com.app.materialsdelivery.domain.entity.Company
+import com.app.materialsdelivery.presentation.MainActivity
+import com.app.materialsdelivery.presentation.TakePhotoCallback
 import com.app.materialsdelivery.presentation.contracts.TakePhotoContract
 import com.app.materialsdelivery.utils.Constants
 import com.app.materialsdelivery.utils.appComponent
@@ -24,27 +26,22 @@ class CompanyInfoEditingFragment : Fragment() {
         get() = requireNotNull(_binding) {
             "FragmentCompanyInfoEditingBinding was null"
         }
+    private var takePhotoCallback: TakePhotoCallback? = null
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
-
-    @Inject
-    lateinit var takePhotoContract: TakePhotoContract
 
     private val viewModel by lazy {
         ViewModelProvider(this, factory)[CompanyInfoEditingViewModel::class.java]
     }
 
-    private val updatePhoto by lazy {
-        registerForActivityResult(takePhotoContract) {
-            viewModel.updateCompanyPhoto(it)
-            setupCurrentData()
-        }
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         context.appComponent.inject(this)
+
+        if (context is MainActivity) {
+            takePhotoCallback = context
+        }
     }
 
     override fun onCreateView(
@@ -64,7 +61,9 @@ class CompanyInfoEditingFragment : Fragment() {
 
         binding.run {
             imgCompanyPhoto.setOnClickListener {
-                updatePhoto.launch(null)
+                takePhotoCallback?.getPhoto {
+                    
+                }
             }
 
             btnSubmit.setOnClickListener {

@@ -3,6 +3,7 @@ package com.app.materialsdelivery.presentation
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.app.materialsdelivery.data.realtimeDatabaseEntities.CompanyEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryItemEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
+import com.app.materialsdelivery.presentation.contracts.TakePhotoContract
 import com.app.materialsdelivery.utils.Constants
 import com.app.materialsdelivery.utils.appComponent
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,10 +28,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TakePhotoCallback {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var takePhotoContract: TakePhotoContract
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -101,6 +106,12 @@ class MainActivity : AppCompatActivity() {
 
         NotificationManagerCompat.from(this)
             .notify(NOTIFICATION_ID, builder.build())
+    }
+
+    override fun getPhoto(takePhotoCallback: ((Uri?) -> Unit)?) {
+        registerForActivityResult(takePhotoContract) {
+            takePhotoCallback?.invoke(it)
+        }.launch(null)
     }
 
     private companion object {
