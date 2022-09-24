@@ -1,21 +1,11 @@
 package com.app.materialsdelivery.data.realtimeDatabaseEntities
 
 data class DeliveryEntity(
-    val id: Int,
-    val deliverySubject: DeliveryItemEntity,
-    val totalAmount: Long,
-    val deliveryPrice: Long,
-    val subjectsCount: Int,
-    val destinationCompany: CompanyEntity?,
-    val dispatchCompany: CompanyEntity?,
-) {
-    constructor(): this(
-        -1,
-        DeliveryItemEntity(),
-        -1,
-        -1,
-        0,
-        null,
-        null
-    )
-}
+    val id: Int = -1,
+    val deliverySubject: DeliveryItemEntity = DeliveryItemEntity(),
+    val totalAmount: Long = -1,
+    val deliveryPrice: Long = -1,
+    val subjectsCount: Int = 0,
+    val destinationCompany: CompanyEntity? = null,
+    val dispatchCompany: CompanyEntity? = null,
+)

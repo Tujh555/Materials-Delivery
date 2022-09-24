@@ -4,11 +4,10 @@ import com.app.materialsdelivery.domain.MaterialsDeliveryRepository
 import com.app.materialsdelivery.domain.entity.Delivery
 import javax.inject.Inject
 
-class DeleteDeliveryUseCase @Inject constructor(
+class CancelDeleteDeliveryUseCase @Inject constructor(
     private val repository: MaterialsDeliveryRepository
 ) {
-    suspend operator fun invoke(delivery: Delivery){
-        repository.deleteDelivery(delivery)
+    suspend operator fun invoke(delivery: Delivery) {
+        repository.deleteDelivery(delivery, false)
     }
-
 }

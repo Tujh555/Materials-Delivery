@@ -1,12 +1,10 @@
 package com.app.materialsdelivery.data
 
 import android.util.Log
-import android.widget.NumberPicker.OnValueChangeListener
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import com.app.materialsdelivery.data.mappers.toDomain
 import com.app.materialsdelivery.data.mappers.toEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryEntity
+import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
 import com.app.materialsdelivery.domain.MaterialsDeliveryRepository
 import com.app.materialsdelivery.domain.entity.Company
 import com.app.materialsdelivery.domain.entity.Delivery
@@ -31,11 +29,25 @@ class FirebaseRepository @Inject constructor(
         }
     }
 
-    override suspend fun deleteDelivery(delivery: Delivery) {
-        val entity = delivery.toEntity()
-        databaseReference.child(Constants.DELIVERY_CHILD_PATH)
-            .child(entity.id.toString())
-            .removeValue()
+    override suspend fun deleteDelivery(delivery: Delivery, isConfirm: Boolean) {
+        withContext(Dispatchers.IO) {
+            val entity = delivery.toEntity()
+            databaseReference.child(Constants.DELIVERY_CHILD_PATH)
+                .child(entity.id.toString())
+                .removeValue()
+
+            if (isConfirm) {
+                val notificationData = NotificationData(
+                    deliveryId = delivery.id,
+                    companyName = delivery.dispatchCompany?.name ?: "empty",
+                    notifiedCompanyName = delivery.destinationCompany?.name ?: "empty"
+                )
+
+                databaseReference.child(Constants.CONFIRM_NOTIFICATION_DATA_PATH)
+                    .child(delivery.id.toString())
+                    .setValue(notificationData)
+            }
+        }
     }
 
     override fun getDelivery(callback: (List<Delivery>) -> Unit) {

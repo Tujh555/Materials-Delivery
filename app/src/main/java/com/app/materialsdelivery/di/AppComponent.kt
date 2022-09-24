@@ -5,6 +5,7 @@ import com.app.materialsdelivery.di.modules.AdapterModule
 import com.app.materialsdelivery.di.modules.FirebaseModule
 import com.app.materialsdelivery.di.modules.RepositoryModule
 import com.app.materialsdelivery.di.modules.viewModels.ViewModelModule
+import com.app.materialsdelivery.presentation.MainActivity
 import com.app.materialsdelivery.presentation.authorization.AuthorizationFragment
 import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyFragment
 import dagger.BindsInstance
@@ -21,6 +22,7 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent {
+    fun inject(activity: MainActivity)
     fun inject(fragment: AuthorizationFragment)
     fun inject(fragment: SuppliesForTheCompanyFragment)
 

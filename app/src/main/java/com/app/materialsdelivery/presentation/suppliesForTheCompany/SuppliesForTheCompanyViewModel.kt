@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.materialsdelivery.domain.entity.Delivery
-import com.app.materialsdelivery.domain.usecase.DeleteDeliveryUseCase
+import com.app.materialsdelivery.domain.usecase.ConfirmDeleteDeliveryUseCase
 import com.app.materialsdelivery.domain.usecase.GetDeliveryUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SuppliesForTheCompanyViewModel @Inject constructor(
-    private val deleteDeliveryUseCase: DeleteDeliveryUseCase,
+    private val confirmDeleteDeliveryUseCase: ConfirmDeleteDeliveryUseCase,
     private val getDeliveriesUseCase: GetDeliveryUseCase
 ) : ViewModel() {
     private val _deliveryList = MutableLiveData<List<Delivery>>()
@@ -20,15 +20,17 @@ class SuppliesForTheCompanyViewModel @Inject constructor(
         get() = _deliveryList
 
     init {
-        getDeliveriesUseCase.addCallback {
-            Log.d("MyLogs", "ViewModel" + it.joinToString { " " })
-            _deliveryList.postValue(it)
+        getDeliveriesUseCase.addCallback { deliveries ->
+            Log.d("MyLogs", "ViewModel" + deliveries.joinToString {
+                it.toString()
+            })
+            _deliveryList.postValue(deliveries)
         }
     }
 
     fun deleteDelivery(delivery: Delivery){
         viewModelScope.launch {
-            deleteDeliveryUseCase.invoke(delivery)
+            confirmDeleteDeliveryUseCase.invoke(delivery)
         }
     }
 }
