@@ -8,28 +8,15 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentContainerView
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.app.materialsdelivery.R
-import com.app.materialsdelivery.data.realtimeDatabaseEntities.CompanyEntity
-import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryEntity
-import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryItemEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
-import com.app.materialsdelivery.databinding.ActivityMainBinding
+import com.app.materialsdelivery.databinding.ActivityMainLayoutBinding
 import com.app.materialsdelivery.presentation.contracts.TakePhotoContract
-import com.app.materialsdelivery.utils.Constants
 import com.app.materialsdelivery.utils.appComponent
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
@@ -47,12 +34,12 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
     }
 
     private val binding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
+        ActivityMainLayoutBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         appComponent.inject(this)
     }
 
@@ -68,13 +55,17 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
                 .fragmentContainer
                 .findNavController()
 
+            Log.d("MyLogs", "Bottom menu")
+
             when (menuItem.itemId) {
                 R.id.delivery_adding -> {
                     controller.navigate(R.id.action_global_adding_shipping_fragment)
+                    Log.d("MyLogs", "Adding shipping")
                 }
 
                 R.id.received_deliveries -> {
-                    controller.navigate(R.id.action_authorizationFragment_to_suppliesForTheCompanyFragment)
+                    controller.navigate(R.id.action_global_suppliesForTheCompanyFragment)
+                    Log.d("MyLogs", "Received deliveries")
                 }
 
                 R.id.sent_deliveries -> {
@@ -83,6 +74,7 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
 
                 R.id.company_info -> {
                     controller.navigate(R.id.action_global_company_info_fragment)
+                    Log.d("MyLogs", "Company info")
                 }
             }
 
