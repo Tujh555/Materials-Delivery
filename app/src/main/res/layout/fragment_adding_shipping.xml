@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:autofillHints="addressLocality"
             android:background="@drawable/custom_input"
-            android:inputType="textCapWords"
+            android:inputType="textMultiLine"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
