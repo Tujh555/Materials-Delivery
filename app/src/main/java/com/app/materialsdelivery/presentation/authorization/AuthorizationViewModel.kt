@@ -7,11 +7,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.materialsdelivery.domain.entity.Company
 import com.app.materialsdelivery.domain.usecase.AddCompanyUseCase
+import com.app.materialsdelivery.utils.Constants
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AuthorizationViewModel @Inject constructor(
     private val addCompanyUseCase: AddCompanyUseCase,
+    private val databaseReference: DatabaseReference
 ) : ViewModel() {
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean> get() = _errorInputName
@@ -53,7 +59,7 @@ class AuthorizationViewModel @Inject constructor(
             val inputCity = parseInputData(city)
             if (validateInput(inputName, inputCity)) {
                 val company = Company(
-                    0,
+                    inputName.hashCode(),
                     inputName,
                     inputCity,
                     null,
@@ -64,13 +70,24 @@ class AuthorizationViewModel @Inject constructor(
                     null,
                     null
                 )
+                Constants.currentCompany = company
                 addCompanyUseCase.invoke(company)
                 Log.d("testUseCase", "good work")
             }
         }
     }
 
-    fun checkInputDataFromDb(name: String?, city: String){
-        TODO("реализация проверки аккаунта в базе данных")
+    fun checkInputDataFromDb(company: Company) {
+        databaseReference.child(Constants.COMPANIES_CHILD_PATH)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
     }
 }

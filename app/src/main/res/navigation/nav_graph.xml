@@ -19,4 +19,12 @@
         android:name="com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyFragment"
         android:label="fragment_supplies_for_the_company"
         tools:layout="@layout/fragment_supplies_for_the_company" />
+    <fragment
+        android:id="@+id/companyInfoEditingFragment"
+        android:name="com.app.materialsdelivery.presentation.companyInfo.CompanyInfoEditingFragment"
+        android:label="CompanyInfoEditingFragment" />
+
+    <action
+        android:id="@+id/action_global_company_info_fragment"
+        app:destination="@id/companyInfoEditingFragment"/>
 </navigation>

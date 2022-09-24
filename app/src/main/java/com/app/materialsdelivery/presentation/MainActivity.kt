@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryItemEntit
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
 import com.app.materialsdelivery.utils.Constants
 import com.app.materialsdelivery.utils.appComponent
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -40,50 +42,65 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         appComponent.inject(this)
-
-        lifecycleScope.launchWhenCreated {
-            delay(12_000)
-
-            FirebaseDatabase
-                .getInstance()
-                .reference
-                .child(Constants.CONFIRM_NOTIFICATION_DATA_PATH)
-                .child("10")
-                .setValue(
-                    NotificationData(
-                        124,
-                        "Доставляющая компания",
-                        "Notified"
-                    )
-                )
-        }
     }
 
     override fun onStart() {
         super.onStart()
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         viewModel.observeNotifications { notificationData ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channel = NotificationChannel(
-                    NOTIFICATION_CHANNEL_ID,
-                    NOTIFICATION_CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_HIGH
-                )
+            showNotification(notificationData)
+        }
+        val bottomMenu = findViewById<BottomNavigationView>(R.id.bottom_menu)
 
-                notificationManager.createNotificationChannel(channel)
+        bottomMenu.setOnItemSelectedListener { menuItem ->
+            val controller = findViewById<FragmentContainerView>(R.id.fragment_container)
+                .findNavController()
+
+            when (menuItem.itemId) {
+                R.id.delivery_adding -> {
+
+                }
+
+                R.id.received_deliveries -> {
+
+                }
+
+                R.id.sent_deliveries -> {
+
+                }
+
+                R.id.company_info -> {
+                    controller.navigate(R.id.action_global_company_info_fragment)
+                }
             }
 
-            val builder = NotificationCompat.Builder(this, NOTIFICATION_BUILDER_ID)
-                .setContentTitle("Уведомление о доставке")
-                .setContentText(notificationData.toString())
-                .setSmallIcon(R.drawable.ic_baseline_delivery_dining_24)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
 
-            NotificationManagerCompat.from(this)
-                .notify(NOTIFICATION_ID, builder.build())
+            true
         }
+    }
+
+    private fun showNotification(notificationData: NotificationData) {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                NOTIFICATION_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val builder = NotificationCompat.Builder(this, NOTIFICATION_BUILDER_ID)
+            .setContentTitle("Уведомление о доставке")
+            .setContentText(notificationData.toString())
+            .setSmallIcon(R.drawable.ic_baseline_delivery_dining_24)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setChannelId(NOTIFICATION_CHANNEL_ID)
+
+        NotificationManagerCompat.from(this)
+            .notify(NOTIFICATION_ID, builder.build())
     }
 
     private companion object {

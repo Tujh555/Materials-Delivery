@@ -14,8 +14,8 @@ class SuppliesForTheCompanyAdapter :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(delivery: Delivery) {
                 binding.run {
-                    tvName.text = delivery.deliverySubject.toString()
-                    tvCity.text = delivery.totalAmount.toString()
+                    textView.text = delivery.deliverySubject.name
+                    textView12.text = delivery.totalAmount.toString()
                 }
             }
         }

@@ -58,6 +58,10 @@ class AuthorizationFragment : Fragment() {
                     findNavController().navigate(it)
                 }
         }
+
+        binding.authorization.setOnClickListener {
+
+        }
     }
 
     private fun buttonAuthClickListener() {
