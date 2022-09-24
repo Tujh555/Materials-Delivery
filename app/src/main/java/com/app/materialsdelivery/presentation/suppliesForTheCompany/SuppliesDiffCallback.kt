@@ -1,4 +1,4 @@
-package com.app.materialsdelivery.presentation.fragments.suppliesForTheCompany
+package com.app.materialsdelivery.presentation.suppliesForTheCompany
 
 import androidx.recyclerview.widget.DiffUtil
 import com.app.materialsdelivery.domain.entity.Delivery

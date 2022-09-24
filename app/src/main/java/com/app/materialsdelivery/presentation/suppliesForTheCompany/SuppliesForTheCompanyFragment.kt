@@ -1,4 +1,4 @@
-package com.app.materialsdelivery.presentation.fragments.suppliesForTheCompany
+package com.app.materialsdelivery.presentation.suppliesForTheCompany
 
 import android.content.Context
 import android.os.Bundle

@@ -7,7 +7,7 @@ import com.app.materialsdelivery.di.modules.RepositoryModule
 import com.app.materialsdelivery.di.modules.viewModels.ViewModelModule
 import com.app.materialsdelivery.presentation.MainActivity
 import com.app.materialsdelivery.presentation.authorization.AuthorizationFragment
-import com.app.materialsdelivery.presentation.fragments.suppliesForTheCompany.SuppliesForTheCompanyFragment
+import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
