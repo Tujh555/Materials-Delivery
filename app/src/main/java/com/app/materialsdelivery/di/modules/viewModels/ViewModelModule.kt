@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.materialsdelivery.presentation.MainActivityViewModel
 import com.app.materialsdelivery.presentation.authorization.AuthorizationFragment
 import com.app.materialsdelivery.presentation.authorization.AuthorizationViewModel
+import com.app.materialsdelivery.presentation.companyInfo.CompanyInfoEditingViewModel
 import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyViewModel
 import dagger.Binds
 import dagger.Module
@@ -29,4 +30,9 @@ interface ViewModelModule {
     @Binds
     @ViewModelKey(MainActivityViewModel::class)
     fun bindMainActivityViewModel(model: MainActivityViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(CompanyInfoEditingViewModel::class)
+    fun bindInfoEditing(model: CompanyInfoEditingViewModel): ViewModel
 }
