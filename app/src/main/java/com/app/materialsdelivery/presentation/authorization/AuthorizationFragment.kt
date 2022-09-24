@@ -1,5 +1,6 @@
 package com.app.materialsdelivery.presentation.authorization
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,12 +10,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.app.materialsdelivery.databinding.FragmentAuthorizationBinding
+import com.app.materialsdelivery.utils.appComponent
+import javax.inject.Inject
 
 class AuthorizationFragment : Fragment() {
-
     private var _binding: FragmentAuthorizationBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AuthorizationViewModel
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            factory
+        ).get(AuthorizationViewModel::class.java)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +42,7 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[AuthorizationViewModel::class.java]
+
         addTextChangedListener()
         buttonAuthClickListener()
         errorInput()

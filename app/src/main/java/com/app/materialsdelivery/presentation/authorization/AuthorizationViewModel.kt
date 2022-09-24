@@ -1,19 +1,18 @@
 package com.app.materialsdelivery.presentation.authorization
 
-import android.app.Application
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.*
-import com.app.materialsdelivery.TestImpl
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.app.materialsdelivery.domain.entity.Company
 import com.app.materialsdelivery.domain.usecase.AddCompanyUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AuthorizationViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = TestImpl(application)
-    private val addCompanyUseCase = AddCompanyUseCase(repository)
-
+class AuthorizationViewModel @Inject constructor(
+    private val addCompanyUseCase: AddCompanyUseCase,
+) : ViewModel() {
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean> get() = _errorInputName
 

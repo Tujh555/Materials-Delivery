@@ -1,5 +1,6 @@
 package com.app.materialsdelivery.presentation.suppliesForTheCompany
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,30 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.app.materialsdelivery.databinding.FragmentSuppliesForTheCompanyBinding
+import com.app.materialsdelivery.utils.appComponent
+import javax.inject.Inject
 
 class SuppliesForTheCompanyFragment : Fragment() {
-
-    private lateinit var viewModel: SuppliesForTheCompanyViewModel
-    private lateinit var adapter: SuppliesForTheCompanyAdapter
     private var _binding: FragmentSuppliesForTheCompanyBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var adapter: SuppliesForTheCompanyAdapter
+
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            factory
+        ).get(SuppliesForTheCompanyViewModel::class.java)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +50,6 @@ class SuppliesForTheCompanyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[SuppliesForTheCompanyViewModel::class.java]
         viewModel.deliveryList.observe(viewLifecycleOwner){
             adapter.submitList(it)
         }
@@ -40,7 +57,7 @@ class SuppliesForTheCompanyFragment : Fragment() {
 
     private fun setupRecyclerView(){
         val rv = binding.recyclerView
-        adapter = SuppliesForTheCompanyAdapter()
+
         rv.adapter = adapter
         setupSwipeClickListener(rv)
 

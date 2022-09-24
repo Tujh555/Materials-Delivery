@@ -26,8 +26,8 @@ fun Delivery.toEntity(): DeliveryEntity = DeliveryEntity(
     totalAmount,
     deliveryPrice,
     subjectsCount,
-    destinationCompany.toEntity(),
-    dispatchCompany.toEntity(),
+    destinationCompany?.toEntity(),
+    dispatchCompany?.toEntity(),
 )
 
 fun DeliveryItem.toEntity(): DeliveryItemEntity = DeliveryItemEntity(
@@ -35,4 +35,34 @@ fun DeliveryItem.toEntity(): DeliveryItemEntity = DeliveryItemEntity(
     name,
     units,
     unitPrice
+)
+
+fun DeliveryEntity.toDomain(): Delivery = Delivery(
+    id,
+    deliverySubject.toDomain(),
+    totalAmount,
+    deliveryPrice,
+    subjectsCount,
+    destinationCompany?.toDomain(),
+    dispatchCompany?.toDomain()
+)
+
+fun DeliveryItemEntity.toDomain(): DeliveryItem = DeliveryItem(
+    id,
+    name,
+    units,
+    unitPrice
+)
+
+fun CompanyEntity.toDomain(): Company = Company(
+    id,
+    name,
+    cityName,
+    photoUri,
+    individualTaxNumber,
+    offeredProducts,
+    companyDescription,
+    foundationYear,
+    outgoingDeliveries?.map { it.toDomain() },
+    incomingDeliveries?.map { it.toDomain() },
 )
