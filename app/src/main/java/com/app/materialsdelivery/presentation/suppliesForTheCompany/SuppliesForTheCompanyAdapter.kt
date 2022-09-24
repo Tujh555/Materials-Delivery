@@ -10,8 +10,15 @@ import com.app.materialsdelivery.domain.entity.Delivery
 class SuppliesForTheCompanyAdapter :
     ListAdapter<Delivery, SuppliesForTheCompanyAdapter.ViewHolder>(SuppliesDiffCallback()) {
 
-    class ViewHolder(binding: ItemFromSuppliesForTheCompanyBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(private val binding: ItemFromSuppliesForTheCompanyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+            fun bind(delivery: Delivery) {
+                binding.run {
+                    tvName.text = delivery.deliverySubject.toString()
+                    tvCity.text = delivery.totalAmount.toString()
+                }
+            }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater.from(parent.context)
@@ -20,7 +27,7 @@ class SuppliesForTheCompanyAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("использовать getItem(position))")
+        holder.bind(getItem(position))
     }
 
 }

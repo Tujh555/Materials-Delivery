@@ -1,5 +1,6 @@
 package com.app.materialsdelivery.presentation.suppliesForTheCompany
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,7 @@ class SuppliesForTheCompanyViewModel @Inject constructor(
 
     init {
         getDeliveriesUseCase.addCallback {
+            Log.d("MyLogs", "ViewModel" + it.joinToString { " " })
             _deliveryList.postValue(it)
         }
     }

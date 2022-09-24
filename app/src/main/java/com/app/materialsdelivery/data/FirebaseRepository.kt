@@ -44,6 +44,7 @@ class FirebaseRepository @Inject constructor(
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val deliveries = try {
                         snapshot.children.map {
+                            Log.d("MyLogs", it.toString())
                             it.getValue(DeliveryEntity::class.java)
                                 ?.toDomain()
                                 ?: DeliveryEntity().toDomain()
@@ -53,10 +54,13 @@ class FirebaseRepository @Inject constructor(
                         emptyList()
                     }
 
+                    Log.d("MyLogs", "Repository" + deliveries.joinToString { " " })
                     callback(deliveries)
                 }
 
-                override fun onCancelled(error: DatabaseError) {  }
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MyLogs", error.toString())
+                }
 
             })
     }

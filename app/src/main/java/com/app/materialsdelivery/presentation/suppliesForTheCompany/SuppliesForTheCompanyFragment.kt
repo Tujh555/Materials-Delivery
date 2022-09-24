@@ -57,10 +57,8 @@ class SuppliesForTheCompanyFragment : Fragment() {
 
     private fun setupRecyclerView(){
         val rv = binding.recyclerView
-
         rv.adapter = adapter
         setupSwipeClickListener(rv)
-
     }
 
     private fun setupSwipeClickListener(rvBusinessList: RecyclerView?) {

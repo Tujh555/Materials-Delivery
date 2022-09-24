@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.app.materialsdelivery.databinding.FragmentAuthorizationBinding
 import com.app.materialsdelivery.utils.appComponent
 import javax.inject.Inject
@@ -48,6 +49,14 @@ class AuthorizationFragment : Fragment() {
         errorInput()
         viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
             requireActivity().onBackPressed()
+        }
+
+        binding.input.setOnClickListener {
+            AuthorizationFragmentDirections
+                .actionAuthorizationFragmentToSuppliesForTheCompanyFragment()
+                .let {
+                    findNavController().navigate(it)
+                }
         }
     }
 
