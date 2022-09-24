@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.materialsdelivery.presentation.MainActivityViewModel
 import com.app.materialsdelivery.presentation.authorization.AuthorizationFragment
 import com.app.materialsdelivery.presentation.authorization.AuthorizationViewModel
-import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyViewModel
+import com.app.materialsdelivery.presentation.fragments.suppliesForTheCompany.SuppliesForTheCompanyViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/suppliesForTheCompanyFragment"
-        android:name="com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyFragment"
+        android:name="com.app.materialsdelivery.presentation.fragments.suppliesForTheCompany.SuppliesForTheCompanyFragment"
         android:label="fragment_supplies_for_the_company"
         tools:layout="@layout/fragment_supplies_for_the_company" />
 </navigation>

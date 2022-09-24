@@ -1,4 +1,4 @@
-package com.app.materialsdelivery.presentation.suppliesForTheCompany
+package com.app.materialsdelivery.presentation.fragments.suppliesForTheCompany
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
