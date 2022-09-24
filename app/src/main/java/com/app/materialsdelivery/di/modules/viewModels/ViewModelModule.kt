@@ -7,6 +7,7 @@ import com.app.materialsdelivery.presentation.authorization.AuthorizationFragmen
 import com.app.materialsdelivery.presentation.authorization.AuthorizationViewModel
 import com.app.materialsdelivery.presentation.companyInfo.CompanyInfoEditingViewModel
 import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyViewModel
+import com.app.materialsdelivery.presentation.suppliesFromCompany.SuppliesFromCompanyViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -35,4 +36,9 @@ interface ViewModelModule {
     @Binds
     @ViewModelKey(CompanyInfoEditingViewModel::class)
     fun bindInfoEditing(model: CompanyInfoEditingViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(SuppliesFromCompanyViewModel::class)
+    fun bindSuppliesFromViewModel(model: SuppliesFromCompanyViewModel): ViewModel
 }

@@ -1,6 +1,5 @@
-package com.app.materialsdelivery.presentation.suppliesForTheCompany
+package com.app.materialsdelivery.presentation.suppliesFromCompany
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,7 @@ import com.app.materialsdelivery.utils.Constants
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SuppliesForTheCompanyViewModel @Inject constructor(
+class SuppliesFromCompanyViewModel @Inject constructor(
     private val confirmDeleteDeliveryUseCase: ConfirmDeleteDeliveryUseCase,
     private val getDeliveriesUseCase: GetDeliveryUseCase
 ) : ViewModel() {
@@ -24,7 +23,7 @@ class SuppliesForTheCompanyViewModel @Inject constructor(
         getDeliveriesUseCase.addCallback { deliveries ->
             _deliveryList.postValue(
                 deliveries.filter {
-                    it.destinationCompany?.name == Constants.currentCompany?.name
+                    it.dispatchCompany?.name == Constants.currentCompany?.name
                 }
             )
         }

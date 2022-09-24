@@ -1,4 +1,4 @@
-package com.app.materialsdelivery.presentation.addingShipping
+package com.app.materialsdelivery.data.addingShipping
 
 import androidx.lifecycle.ViewModel
 

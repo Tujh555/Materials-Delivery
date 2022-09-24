@@ -65,13 +65,30 @@ class CompanyInfoEditingFragment : Fragment() {
 
         binding.run {
             imgCompanyPhoto.setOnClickListener {
-                takePhotoCallback?.getPhoto {
-                    
-                }
+
             }
 
             btnSubmit.setOnClickListener {
                 viewModel.updateCompany(getNewCompanyInfo())
+            }
+        }
+
+        viewModel.company.observe(viewLifecycleOwner) { company ->
+            Constants.currentCompany = company
+
+            binding.run {
+                Glide.with(requireContext())
+                    .load(company.photoUri)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_baseline_delivery_dining_24)
+                    .into(binding.imgCompanyPhoto)
+
+                etCompanyName.setText(company.name)
+                etCompanyCity.setText(company.cityName)
+                data.setText(company.foundationYear)
+                companyDescription.setText(company.companyDescription)
+                products.setText(company.offeredProducts?.firstOrNull())
+                inn.setText(company.individualTaxNumber)
             }
         }
     }

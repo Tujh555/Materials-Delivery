@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
@@ -55,26 +56,21 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
                 .fragmentContainer
                 .findNavController()
 
-            Log.d("MyLogs", "Bottom menu")
-
             when (menuItem.itemId) {
                 R.id.delivery_adding -> {
                     controller.navigate(R.id.action_global_adding_shipping_fragment)
-                    Log.d("MyLogs", "Adding shipping")
                 }
 
                 R.id.received_deliveries -> {
                     controller.navigate(R.id.action_global_suppliesForTheCompanyFragment)
-                    Log.d("MyLogs", "Received deliveries")
                 }
 
                 R.id.sent_deliveries -> {
-
+                    controller.navigate(R.id.action_global_supplies_form_company)
                 }
 
                 R.id.company_info -> {
                     controller.navigate(R.id.action_global_company_info_fragment)
-                    Log.d("MyLogs", "Company info")
                 }
             }
 
@@ -121,5 +117,11 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
 
     override fun switch(isVisible: Boolean) {
         Log.d("MyLogs", "$isVisible")
+
+        binding.bottomMenu.visibility = if (isVisible) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 }

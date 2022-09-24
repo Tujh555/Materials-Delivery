@@ -10,6 +10,7 @@ import com.app.materialsdelivery.presentation.MainActivity
 import com.app.materialsdelivery.presentation.authorization.AuthorizationFragment
 import com.app.materialsdelivery.presentation.companyInfo.CompanyInfoEditingFragment
 import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyFragment
+import com.app.materialsdelivery.presentation.suppliesFromCompany.SuppliesFromCompanyFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -29,6 +30,7 @@ interface AppComponent {
     fun inject(fragment: AuthorizationFragment)
     fun inject(fragment: SuppliesForTheCompanyFragment)
     fun inject(fragment: CompanyInfoEditingFragment)
+    fun inject(fragment: SuppliesFromCompanyFragment)
 
     @Component.Builder
     interface Builder {

@@ -1,9 +1,8 @@
-package com.app.materialsdelivery.presentation.suppliesForTheCompany
+package com.app.materialsdelivery.presentation.suppliesFromCompany
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -13,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.materialsdelivery.databinding.FragmentSuppliesForTheCompanyBinding
 import com.app.materialsdelivery.presentation.MainActivity
 import com.app.materialsdelivery.presentation.MenuSwitcher
+import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyAdapter
+import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyViewModel
 import com.app.materialsdelivery.utils.appComponent
 import javax.inject.Inject
 
-class SuppliesForTheCompanyFragment : Fragment() {
+class SuppliesFromCompanyFragment : Fragment() {
     private var _binding: FragmentSuppliesForTheCompanyBinding? = null
     private val binding get() = _binding!!
     private var menuSwitcher: MenuSwitcher? = null
@@ -31,7 +32,7 @@ class SuppliesForTheCompanyFragment : Fragment() {
         ViewModelProvider(
             this,
             factory
-        )[SuppliesForTheCompanyViewModel::class.java]
+        )[SuppliesFromCompanyViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {
@@ -91,9 +92,7 @@ class SuppliesForTheCompanyFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = adapter.currentList[viewHolder.adapterPosition]
-                viewModel.deleteDelivery(item, true)
-
-
+                viewModel.deleteDelivery(item, false)
             }
         }
 

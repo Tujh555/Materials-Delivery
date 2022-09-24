@@ -3,6 +3,7 @@ package com.app.materialsdelivery.data
 import android.util.Log
 import com.app.materialsdelivery.data.mappers.toDomain
 import com.app.materialsdelivery.data.mappers.toEntity
+import com.app.materialsdelivery.data.realtimeDatabaseEntities.CompanyEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
 import com.app.materialsdelivery.domain.MaterialsDeliveryRepository
@@ -68,6 +69,26 @@ class FirebaseRepository @Inject constructor(
 
                     Log.d("MyLogs", "Repository" + deliveries.joinToString { " " })
                     callback(deliveries)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MyLogs", error.toString())
+                }
+
+            })
+    }
+
+    override fun getCompany(callback: (Company) -> Unit) {
+        databaseReference.child(Constants.COMPANIES_CHILD_PATH)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val company = snapshot.children.first {
+                        it.getValue(CompanyEntity::class.java)?.id == Constants.currentCompany?.id
+                    }.getValue(CompanyEntity::class.java)
+                        ?.toDomain()
+                        ?: Constants.currentCompany
+
+                    callback(company!!)
                 }
 
                 override fun onCancelled(error: DatabaseError) {

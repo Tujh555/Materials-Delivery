@@ -10,4 +10,6 @@ interface MaterialsDeliveryRepository{
     suspend fun deleteDelivery(delivery: Delivery, isConfirm: Boolean)
 
     fun getDelivery(callback: (List<Delivery>) -> Unit)
+
+    fun getCompany(callback: (Company) -> Unit)
 }

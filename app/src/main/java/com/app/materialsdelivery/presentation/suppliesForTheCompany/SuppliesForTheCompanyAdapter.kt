@@ -16,6 +16,11 @@ class SuppliesForTheCompanyAdapter :
                 binding.run {
                     textView.text = delivery.deliverySubject.name
                     textView12.text = delivery.totalAmount.toString()
+                    textView9.text = delivery.dispatchCompany?.cityName ?: "Китай"
+                    textView8.text = delivery.deliverySubject.unitPrice.toString()
+                    textView10.text = delivery.subjectsCount.toString()
+                    textView11.text = delivery.deliveryPrice.toString()
+                    textView12.text = delivery.totalAmount.toString()
                 }
             }
         }

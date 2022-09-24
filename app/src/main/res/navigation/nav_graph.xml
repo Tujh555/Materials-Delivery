@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/addingShippingFragment"
-        android:name="com.app.materialsdelivery.presentation.addingShipping.AddingShippingFragment"
+        android:name="com.app.materialsdelivery.data.addingShipping.AddingShippingFragment"
         android:label="fragment_adding_shipping"
         tools:layout="@layout/fragment_adding_shipping" />
 
@@ -41,4 +41,12 @@
     <action
         android:id="@+id/action_global_suppliesForTheCompanyFragment"
         app:destination="@id/suppliesForTheCompanyFragment"/>
+
+    <action
+        android:id="@+id/action_global_supplies_form_company"
+        app:destination="@id/suppliesFromCompanyFragment"/>
+    <fragment
+        android:id="@+id/suppliesFromCompanyFragment"
+        android:name="com.app.materialsdelivery.presentation.suppliesFromCompany.SuppliesFromCompanyFragment"
+        android:label="SuppliesFromCompanyFragment" />
 </navigation>

@@ -7,8 +7,8 @@ import javax.inject.Inject
 class ConfirmDeleteDeliveryUseCase @Inject constructor(
     private val repository: MaterialsDeliveryRepository
 ) {
-    suspend operator fun invoke(delivery: Delivery){
-        repository.deleteDelivery(delivery, true)
+    suspend operator fun invoke(delivery: Delivery, confirmed: Boolean){
+        repository.deleteDelivery(delivery, confirmed)
     }
 
 }
