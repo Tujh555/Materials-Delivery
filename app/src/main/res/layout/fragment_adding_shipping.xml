@@ -16,12 +16,12 @@
         android:layout_marginBottom="32dp"
         android:hint="Описание товара"
         android:textColorHint="@android:color/darker_gray"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd_Egot_ty_ne_oschibyoschsya"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNameCompany2"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+        app:layout_constraintTop_toBottomOf="@+id/add_price">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/add_description_edit"
@@ -39,28 +39,31 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/custom_input"
         android:text="Сохранить"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_description" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addNameCompany2"
+        android:id="@+id/add_price"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:hint="Цена"
         android:textColorHint="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="@+id/add_price"
-        app:layout_constraintTop_toBottomOf="@+id/add_price"
         app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/add_name_company2"
+        app:layout_constraintTop_toBottomOf="@+id/add_recipient">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addNameCompany3"
+            android:id="@+id/add_price_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="addressLocality"
@@ -81,7 +84,32 @@
         android:background="#DDDFEC"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/add_price"
+        android:id="@+id/add_recipient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Получатель"
+        android:textColorHint="@android:color/darker_gray"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_name_company2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_recipient_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="addressLocality"
+            android:background="@drawable/custom_input"
+            android:inputType="textCapWords"
+            android:textColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/add_name_company2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -96,7 +124,7 @@
         app:boxStrokeWidthFocused="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/add_price_edit"
+            android:id="@+id/add_name_company2_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="addressLocality"
@@ -110,13 +138,13 @@
         android:id="@+id/add_count"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:hint="Количество"
         android:textColorHint="@android:color/darker_gray"
-        app:layout_constraintStart_toStartOf="@+id/add_price"
-        app:layout_constraintTop_toBottomOf="@+id/add_price"
         app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintStart_toStartOf="@+id/add_name_company2"
+        app:layout_constraintTop_toBottomOf="@+id/add_recipient">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/add_count_edit"
