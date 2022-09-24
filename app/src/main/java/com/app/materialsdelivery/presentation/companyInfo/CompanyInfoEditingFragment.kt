@@ -32,8 +32,7 @@ class CompanyInfoEditingFragment : Fragment() {
     lateinit var takePhotoContract: TakePhotoContract
 
     private val viewModel by lazy {
-        ViewModelProvider(this, factory)
-            .get(CompanyInfoEditingViewModel::class.java)
+        ViewModelProvider(this, factory)[CompanyInfoEditingViewModel::class.java]
     }
 
     private val updatePhoto by lazy {

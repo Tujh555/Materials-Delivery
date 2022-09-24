@@ -6,6 +6,8 @@
     <string name="company_info_menu_item_text">Профиль</string>
     <string name="enterNameCity">Введите название города</string>
     <string name="enterNameCompany">Введите название компании</string>
-    <string name="input">Войти</string>
-    <string name="auth">зарегистрироваться</string>
+    <string name="input">Sign in</string>
+    <string name="auth">Login Account</string>
+    <string name="name_company">Имя компании</string>
+    <string name="location">Местоположение</string>
 </resources>

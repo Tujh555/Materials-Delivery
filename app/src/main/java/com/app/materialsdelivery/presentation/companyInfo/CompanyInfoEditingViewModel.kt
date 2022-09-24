@@ -27,7 +27,6 @@ class CompanyInfoEditingViewModel @Inject constructor(
 
     fun updateCompany(company: Company) {
         Constants.currentCompany = company
-
         viewModelScope.launch {
             addCompanyUseCase(company)
         }
