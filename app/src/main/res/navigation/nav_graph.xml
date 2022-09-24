@@ -27,4 +27,13 @@
     <action
         android:id="@+id/action_global_company_info_fragment"
         app:destination="@id/companyInfoEditingFragment"/>
+
+    <action
+        android:id="@+id/action_global_adding_shipping_fragment"
+        app:destination="@id/addingShippingFragment"/>
+    <fragment
+        android:id="@+id/addingShippingFragment"
+        android:name="com.app.materialsdelivery.presentation.addingShipping.AddingShippingFragment"
+        android:label="fragment_adding_shipping"
+        tools:layout="@layout/fragment_adding_shipping" />
 </navigation>

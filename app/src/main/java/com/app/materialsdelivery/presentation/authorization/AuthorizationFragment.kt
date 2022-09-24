@@ -11,12 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.materialsdelivery.databinding.FragmentAuthorizationBinding
+import com.app.materialsdelivery.presentation.MainActivity
+import com.app.materialsdelivery.presentation.MenuSwitcher
 import com.app.materialsdelivery.utils.appComponent
 import javax.inject.Inject
 
 class AuthorizationFragment : Fragment() {
     private var _binding: FragmentAuthorizationBinding? = null
     private val binding get() = _binding!!
+    private var menuSwitcher: MenuSwitcher? = null
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -31,6 +34,10 @@ class AuthorizationFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         context.appComponent.inject(this)
+
+        if (context is MainActivity) {
+            menuSwitcher = context
+        }
     }
 
     override fun onCreateView(
@@ -62,6 +69,11 @@ class AuthorizationFragment : Fragment() {
         binding.authorization.setOnClickListener {
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        menuSwitcher?.switch(false)
     }
 
     private fun buttonAuthClickListener() {

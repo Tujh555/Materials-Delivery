@@ -10,5 +10,5 @@ object Constants {
     const val DELIVERY_CHILD_PATH = "deliveries"
     const val CONFIRM_NOTIFICATION_DATA_PATH = "confirmation"
 
-    var currentCompany: Company? = CompanyEntity().copy(name = "Notified").toDomain()
+    var currentCompany: Company? = null
 }

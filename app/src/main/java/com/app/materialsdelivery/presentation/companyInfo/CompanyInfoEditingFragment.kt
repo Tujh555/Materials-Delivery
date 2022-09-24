@@ -13,6 +13,7 @@ import com.app.materialsdelivery.data.realtimeDatabaseEntities.CompanyEntity
 import com.app.materialsdelivery.databinding.FragmentCompanyInfoEditingBinding
 import com.app.materialsdelivery.domain.entity.Company
 import com.app.materialsdelivery.presentation.MainActivity
+import com.app.materialsdelivery.presentation.MenuSwitcher
 import com.app.materialsdelivery.presentation.TakePhotoCallback
 import com.app.materialsdelivery.presentation.contracts.TakePhotoContract
 import com.app.materialsdelivery.utils.Constants
@@ -27,6 +28,7 @@ class CompanyInfoEditingFragment : Fragment() {
             "FragmentCompanyInfoEditingBinding was null"
         }
     private var takePhotoCallback: TakePhotoCallback? = null
+    private var menuSwitcher: MenuSwitcher? = null
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -41,7 +43,9 @@ class CompanyInfoEditingFragment : Fragment() {
 
         if (context is MainActivity) {
             takePhotoCallback = context
+            menuSwitcher = context
         }
+
     }
 
     override fun onCreateView(
@@ -70,6 +74,11 @@ class CompanyInfoEditingFragment : Fragment() {
                 viewModel.updateCompany(getNewCompanyInfo())
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        menuSwitcher?.switch(true)
     }
 
     private fun getNewCompanyInfo(): Company {

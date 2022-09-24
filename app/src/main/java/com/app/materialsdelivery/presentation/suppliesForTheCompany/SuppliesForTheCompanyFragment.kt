@@ -3,6 +3,7 @@ package com.app.materialsdelivery.presentation.suppliesForTheCompany
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -10,12 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.app.materialsdelivery.databinding.FragmentSuppliesForTheCompanyBinding
+import com.app.materialsdelivery.presentation.MainActivity
+import com.app.materialsdelivery.presentation.MenuSwitcher
 import com.app.materialsdelivery.utils.appComponent
 import javax.inject.Inject
 
 class SuppliesForTheCompanyFragment : Fragment() {
     private var _binding: FragmentSuppliesForTheCompanyBinding? = null
     private val binding get() = _binding!!
+    private var menuSwitcher: MenuSwitcher? = null
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -33,6 +37,10 @@ class SuppliesForTheCompanyFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         context.appComponent.inject(this)
+
+        if (context is MainActivity) {
+            menuSwitcher = context
+        }
     }
 
     override fun onCreateView(
@@ -53,6 +61,13 @@ class SuppliesForTheCompanyFragment : Fragment() {
         viewModel.deliveryList.observe(viewLifecycleOwner){
             adapter.submitList(it)
         }
+
+        menuSwitcher?.switch(true)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        menuSwitcher?.switch(true)
     }
 
     private fun setupRecyclerView(){

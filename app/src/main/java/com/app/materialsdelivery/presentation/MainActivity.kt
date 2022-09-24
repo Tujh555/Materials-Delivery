@@ -7,8 +7,11 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +22,7 @@ import com.app.materialsdelivery.data.realtimeDatabaseEntities.CompanyEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.DeliveryItemEntity
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
+import com.app.materialsdelivery.databinding.ActivityMainBinding
 import com.app.materialsdelivery.presentation.contracts.TakePhotoContract
 import com.app.materialsdelivery.utils.Constants
 import com.app.materialsdelivery.utils.appComponent
@@ -28,8 +32,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), TakePhotoCallback {
-
+class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
@@ -41,6 +44,10 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback {
             this,
             factory
         ).get(MainActivityViewModel::class.java)
+    }
+
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,19 +62,19 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback {
         viewModel.observeNotifications { notificationData ->
             showNotification(notificationData)
         }
-        val bottomMenu = findViewById<BottomNavigationView>(R.id.bottom_menu)
 
-        bottomMenu.setOnItemSelectedListener { menuItem ->
-            val controller = findViewById<FragmentContainerView>(R.id.fragment_container)
+        binding.bottomMenu.setOnItemSelectedListener { menuItem ->
+            val controller = binding
+                .fragmentContainer
                 .findNavController()
 
             when (menuItem.itemId) {
                 R.id.delivery_adding -> {
-
+                    controller.navigate(R.id.action_global_adding_shipping_fragment)
                 }
 
                 R.id.received_deliveries -> {
-
+                    controller.navigate(R.id.action_authorizationFragment_to_suppliesForTheCompanyFragment)
                 }
 
                 R.id.sent_deliveries -> {
@@ -78,7 +85,6 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback {
                     controller.navigate(R.id.action_global_company_info_fragment)
                 }
             }
-
 
             true
         }
@@ -119,5 +125,9 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback {
         const val NOTIFICATION_ID = 1
         const val NOTIFICATION_CHANNEL_ID = "notification_channel_1"
         const val NOTIFICATION_CHANNEL_NAME = "notification_name"
+    }
+
+    override fun switch(isVisible: Boolean) {
+        Log.d("MyLogs", "$isVisible")
     }
 }
