@@ -1,38 +1,41 @@
 package com.app.materialsdelivery.presentation.contracts
 
-import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
+import com.app.materialsdelivery.utils.Constants
+import java.io.File
 import javax.inject.Inject
 
-class TakePhotoContract @Inject constructor() :ActivityResultContract<Uri, Unit>() {
-    override fun createIntent(context: Context, input: Uri): Intent {
-        val captureImage = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-            putExtra(MediaStore.EXTRA_OUTPUT, input)
-        }
+class TakePhotoContract @Inject constructor() : ActivityResultContract<PackageManager, Uri?>() {
+    override fun createIntent(context: Context, input: PackageManager): Intent {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, generateFileUri())
+        intent.resolveActivity(input)
 
-        val cameraActivities: List<ResolveInfo> = context.packageManager.queryIntentActivities(
-            captureImage,
-            PackageManager.MATCH_DEFAULT_ONLY
-        )
-
-        for (cameraActivity in cameraActivities) {
-            context.grantUriPermission(
-                cameraActivity.activityInfo.packageName,
-                input,
-                Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        }
-
-        return captureImage
+        return intent
     }
 
-    override fun parseResult(resultCode: Int, intent: Intent?) {
-        Log.d("MyLog", "Camera result was got")
+    override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+        Log.d("MyLogs", intent?.dataString ?: "null")
+        return intent?.data
+    }
+
+    private fun generateFileUri(): Uri? {
+        return Constants.directory?.let { directory ->
+            val file = File(
+                directory.path + "/" + "photo_" + System.currentTimeMillis() + ".jpg"
+            )
+
+            Uri.fromFile(file)
+        }
+    }
+
+    companion object {
+        private const val REQUEST_IMAGE_CAPTURE = 1
     }
 }

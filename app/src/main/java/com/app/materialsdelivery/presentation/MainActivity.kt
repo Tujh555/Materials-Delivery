@@ -17,6 +17,7 @@ import com.app.materialsdelivery.R
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
 import com.app.materialsdelivery.databinding.ActivityMainLayoutBinding
 import com.app.materialsdelivery.presentation.contracts.TakePhotoContract
+import com.app.materialsdelivery.utils.Constants
 import com.app.materialsdelivery.utils.appComponent
 import javax.inject.Inject
 
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity(), TakePhotoCallback, MenuSwitcher {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         appComponent.inject(this)
+        Constants.createDirectory()
     }
 
     override fun onStart() {
