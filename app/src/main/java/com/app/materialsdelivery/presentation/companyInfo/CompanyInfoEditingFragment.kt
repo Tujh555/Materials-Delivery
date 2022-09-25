@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.app.materialsdelivery.R
@@ -73,6 +74,14 @@ class CompanyInfoEditingFragment : Fragment() {
             }
         }
 
+        viewModel.isDataUpdated.observe(viewLifecycleOwner) {
+            Toast.makeText(
+                requireContext(),
+                "Данные обновлены успешно",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
         viewModel.company.observe(viewLifecycleOwner) { company ->
             Constants.currentCompany = company
 
@@ -100,10 +109,22 @@ class CompanyInfoEditingFragment : Fragment() {
 
     private fun getNewCompanyInfo(): Company {
         return Constants.currentCompany?.copy(
-            name = binding.etCompanyName.text.toString()
+            name = binding.etCompanyName.text.toString(),
+            cityName = binding.etCompanyCity.text.toString(),
+            foundationYear = binding.data.text.toString(),
+            companyDescription = binding.companyDescription.text.toString(),
+            offeredProducts = listOf(binding.products.text.toString()),
+            individualTaxNumber = binding.inn.text.toString()
         ) ?: CompanyEntity()
             .toDomain()
-            .copy(name = binding.etCompanyName.text.toString())
+            .copy(
+                name = binding.etCompanyName.text.toString(),
+                cityName = binding.etCompanyCity.text.toString(),
+                foundationYear = binding.data.text.toString(),
+                companyDescription = binding.companyDescription.text.toString(),
+                offeredProducts = listOf(binding.products.text.toString()),
+                individualTaxNumber = binding.inn.text.toString()
+            )
     }
 
     private fun setupCurrentData() {

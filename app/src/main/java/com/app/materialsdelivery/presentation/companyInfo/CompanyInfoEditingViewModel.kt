@@ -22,6 +22,10 @@ class CompanyInfoEditingViewModel @Inject constructor(
     val company: LiveData<Company>
         get() = _company
 
+    private val _isDataUpdated = MutableLiveData<Boolean>()
+    val isDataUpdated: LiveData<Boolean>
+        get() = _isDataUpdated
+
     init {
         getCompanyUseCase.addCallback {
             _company.postValue(it)
@@ -42,6 +46,7 @@ class CompanyInfoEditingViewModel @Inject constructor(
         Constants.currentCompany = company
         viewModelScope.launch {
             addCompanyUseCase(company)
+            _isDataUpdated.postValue(true)
         }
     }
 }

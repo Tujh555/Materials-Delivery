@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -93,6 +94,12 @@ class SuppliesFromCompanyFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = adapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteDelivery(item, false)
+
+                Toast.makeText(
+                    requireContext(),
+                    "Доставка отменена",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 

@@ -2,12 +2,15 @@ package com.app.materialsdelivery.presentation
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.app.materialsdelivery.data.realtimeDatabaseEntities.NotificationData
+import com.app.materialsdelivery.domain.usecase.DeleteAllConfirmationsUseCase
 import com.app.materialsdelivery.utils.Constants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(

@@ -30,6 +30,13 @@ class FirebaseRepository @Inject constructor(
         }
     }
 
+    override suspend fun deleteAllConfirmations() {
+        withContext(Dispatchers.IO) {
+            databaseReference.child(Constants.CONFIRM_NOTIFICATION_DATA_PATH)
+                .removeValue()
+        }
+    }
+
     override suspend fun deleteDelivery(delivery: Delivery, isConfirm: Boolean) {
         withContext(Dispatchers.IO) {
             val entity = delivery.toEntity()
@@ -49,6 +56,14 @@ class FirebaseRepository @Inject constructor(
                     .setValue(notificationData)
             }
         }
+    }
+
+    override suspend fun addDelivery(delivery: Delivery) {
+        val entity = delivery.toEntity()
+
+        databaseReference.child(Constants.DELIVERY_CHILD_PATH)
+            .child(entity.id.toString())
+            .setValue(entity)
     }
 
     override fun getDelivery(callback: (List<Delivery>) -> Unit) {
@@ -74,7 +89,6 @@ class FirebaseRepository @Inject constructor(
                 override fun onCancelled(error: DatabaseError) {
                     Log.e("MyLogs", error.toString())
                 }
-
             })
     }
 
@@ -82,9 +96,9 @@ class FirebaseRepository @Inject constructor(
         databaseReference.child(Constants.COMPANIES_CHILD_PATH)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val company = snapshot.children.first {
+                    val company = snapshot.children.firstOrNull {
                         it.getValue(CompanyEntity::class.java)?.id == Constants.currentCompany?.id
-                    }.getValue(CompanyEntity::class.java)
+                    }?.getValue(CompanyEntity::class.java)
                         ?.toDomain()
                         ?: Constants.currentCompany
 

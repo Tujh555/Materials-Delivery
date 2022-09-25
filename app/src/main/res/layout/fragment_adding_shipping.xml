@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".data.addingShipping.AddingShippingFragment">
+    tools:context=".presentation.addingShipping.AddingShippingFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_description"
@@ -18,7 +18,7 @@
         android:textColorHint="@android:color/darker_gray"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAdd_Egot_ty_ne_oschibyoschsya"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_price">
@@ -35,7 +35,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/buttonAdd_Egot_ty_ne_oschibyoschsya"
+        android:id="@+id/buttonAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

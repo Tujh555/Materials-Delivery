@@ -7,6 +7,7 @@ import com.app.materialsdelivery.di.modules.FirebaseModule
 import com.app.materialsdelivery.di.modules.RepositoryModule
 import com.app.materialsdelivery.di.modules.viewModels.ViewModelModule
 import com.app.materialsdelivery.presentation.MainActivity
+import com.app.materialsdelivery.presentation.addingShipping.AddingShippingFragment
 import com.app.materialsdelivery.presentation.authorization.AuthorizationFragment
 import com.app.materialsdelivery.presentation.companyInfo.CompanyInfoEditingFragment
 import com.app.materialsdelivery.presentation.suppliesForTheCompany.SuppliesForTheCompanyFragment
@@ -31,6 +32,7 @@ interface AppComponent {
     fun inject(fragment: SuppliesForTheCompanyFragment)
     fun inject(fragment: CompanyInfoEditingFragment)
     fun inject(fragment: SuppliesFromCompanyFragment)
+    fun inject(fragment: AddingShippingFragment)
 
     @Component.Builder
     interface Builder {

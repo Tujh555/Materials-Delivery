@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/addingShippingFragment"
-        android:name="com.app.materialsdelivery.data.addingShipping.AddingShippingFragment"
+        android:name="com.app.materialsdelivery.presentation.addingShipping.AddingShippingFragment"
         android:label="fragment_adding_shipping"
         tools:layout="@layout/fragment_adding_shipping" />
 

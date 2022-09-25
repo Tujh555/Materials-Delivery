@@ -10,9 +10,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.app.materialsdelivery.data.mappers.toDomain
+import com.app.materialsdelivery.data.realtimeDatabaseEntities.CompanyEntity
 import com.app.materialsdelivery.databinding.FragmentAuthorizationBinding
+import com.app.materialsdelivery.domain.entity.Company
 import com.app.materialsdelivery.presentation.MainActivity
 import com.app.materialsdelivery.presentation.MenuSwitcher
+import com.app.materialsdelivery.utils.Constants
 import com.app.materialsdelivery.utils.appComponent
 import javax.inject.Inject
 
@@ -52,37 +56,43 @@ class AuthorizationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         addTextChangedListener()
-        buttonAuthClickListener()
         errorInput()
+
         viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
-            requireActivity().onBackPressed()
+            goToSuppliesFragment()
         }
 
         binding.input.setOnClickListener {
-            AuthorizationFragmentDirections
-                .actionAuthorizationFragmentToSuppliesForTheCompanyFragment()
-                .let {
-                    findNavController().navigate(it)
-                }
-        }
-
-        binding.authorization.setOnClickListener {
-
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        menuSwitcher?.switch(false)
-    }
-
-    private fun buttonAuthClickListener() {
-        binding.authorization.setOnClickListener {
             viewModel.addCompany(
                 binding.addNameCompanyEdit.text?.toString(),
                 binding.addNameCityEdit.text.toString()
             )
         }
+
+        binding.authorization.setOnClickListener {
+            val name = binding.addNameCompanyEdit.text?.toString() ?: "empty"
+            val city =  binding.addNameCityEdit.text?.toString() ?: "empty"
+
+            Constants.currentCompany = CompanyEntity().toDomain().copy(
+                id = name.hashCode(),
+                name = name,
+                cityName = city
+            )
+            goToSuppliesFragment()
+        }
+    }
+
+    private fun goToSuppliesFragment() {
+        AuthorizationFragmentDirections
+            .actionAuthorizationFragmentToSuppliesForTheCompanyFragment()
+            .let {
+                findNavController().navigate(it)
+            }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        menuSwitcher?.switch(false)
     }
 
     private fun errorInput() {

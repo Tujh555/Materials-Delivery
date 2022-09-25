@@ -3,6 +3,7 @@ package com.app.materialsdelivery.di.modules.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.materialsdelivery.presentation.MainActivityViewModel
+import com.app.materialsdelivery.presentation.addingShipping.AddingShippingViewModel
 import com.app.materialsdelivery.presentation.authorization.AuthorizationFragment
 import com.app.materialsdelivery.presentation.authorization.AuthorizationViewModel
 import com.app.materialsdelivery.presentation.companyInfo.CompanyInfoEditingViewModel
@@ -41,4 +42,9 @@ interface ViewModelModule {
     @Binds
     @ViewModelKey(SuppliesFromCompanyViewModel::class)
     fun bindSuppliesFromViewModel(model: SuppliesFromCompanyViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(AddingShippingViewModel::class)
+    fun bindAddingViewModel(model: AddingShippingViewModel): ViewModel
 }

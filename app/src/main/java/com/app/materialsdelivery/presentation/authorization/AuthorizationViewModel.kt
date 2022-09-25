@@ -72,6 +72,8 @@ class AuthorizationViewModel @Inject constructor(
                 )
                 Constants.currentCompany = company
                 addCompanyUseCase.invoke(company)
+
+                _shouldCloseScreen.postValue(Unit)
                 Log.d("testUseCase", "good work")
             }
         }
